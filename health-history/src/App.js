@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import * as apiresult from './res.json'
 import Chart from './components/Chart'
+
+const apiresult = require('./res.json');
+const data = JSON.parse(JSON.stringify(apiresult));
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      chartData: {}
+      chartData: { labels: [], datasets: [] }
     };
   }
 
@@ -17,68 +19,48 @@ class App extends Component {
   }
 
   getChartData() {
-
+    
     this.setState({
       chartData: {
-        labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+        labels: data.map(item => item.date_of_test),
         datasets:[
           {
             label: 'Total Cholesterol',
-            data:[
-                  200,
-                  250,
-                  300,
-                  150,
-                  125,
-                  100
-                ],
-            backgroundColor: [
-              // 'rgba(255, 99, 132, 0.6)'
-              // 'rgba(54, 162, 235, 0.6)',
-              // 'rgba(255, 206, 86, 0.6)',
-              // 'rgba(75, 192, 192, 0.6)',
-              // 'rgba(153, 102, 255, 0.6)',
-              // 'rgba(255, 159, 64, 0.6)',
-              // 'rgba(255, 99, 132, 0.6)'
-            ],
+            data: data.map(item => item.total_cholesterol),
+            backgroundColor: [],
             fill: false,
-            borderColor: ['#ff0000'],
+            borderColor: '#ff0000'
           },
           {
             label: 'Triglycerides',
-            data:[
-                  150,
-                  200,
-                  125,
-                  100,
-                  90,
-                  75
-                ],
-            backgroundColor: [
-              // 'rgba(255, 99, 132, 0.6)'
-              // 'rgba(54, 162, 235, 0.6)',
-              // 'rgba(255, 206, 86, 0.6)',
-              // 'rgba(75, 192, 192, 0.6)',
-              // 'rgba(153, 102, 255, 0.6)',
-              // 'rgba(255, 159, 64, 0.6)',
-              // 'rgba(255, 99, 132, 0.6)'
-            ],
+            data: data.map(item => item.triglycerides),
+            backgroundColor: [],
             fill: false,
-            borderColor: ['#800080'],
-          },          
-
-        ],
-        
+            borderColor: '#800080'
+          },
+          {
+            label: 'HDL',
+            data: data.map(item => item.hdl),
+            backgroundColor: [],
+            fill: false,
+            borderColor: '#008000'
+          },
+          {
+            label: 'LDL',
+            data: data.map(item => item.ldl),
+            backgroundColor: [],
+            fill: false,
+            borderColor: '#0000ff'
+          }
+        ]
       }
-    })
-
-  }
+    });
+}
 
   render() {
-    let res = apiresult;
     return (
       <div>       
-       Hello {res.name}
+       Hello {apiresult[0].name}
          <Chart chartData={this.state.chartData}/>
       </div>
     );
