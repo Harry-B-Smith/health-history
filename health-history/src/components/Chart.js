@@ -32,7 +32,7 @@ class Chart extends Component{
           options={{
             title:{
               display:true,
-              text:'Blood Lipids',
+              text:'Lipid Panel',
               fontSize:25
             },
             legend:{
