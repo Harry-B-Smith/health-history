@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Chart from './Chart';
+import BloodTestInputForm from './BloodTestInputForm';
 
 
 const apiresult = require('../res.json');
@@ -62,6 +63,7 @@ class ChartComponent extends Component {
     render() {
         return (
           <div className="chart-component">
+            <BloodTestInputForm/>
             <Chart chartData={this.state.chartData}/>
           </div>
         );
